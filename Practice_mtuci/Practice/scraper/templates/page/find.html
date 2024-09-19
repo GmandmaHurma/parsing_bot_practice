@@ -1,0 +1,28 @@
+<style>
+    body {
+        background-color: green;
+    }
+    h1 {
+        color: white; /* Цвет текста */
+        font-weight: bold;
+    }
+</style>
+<body>
+    <h1>Найти резюме:</h1>
+
+    <form action="{% url 'scrape_view' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Поиск</button>
+    </form>
+
+    {% if resumes %}
+        <h2>Найденные резюме:</h2>
+        <ul>
+            {% for resume in resumes %}
+                <li>Title: {{ resume.title }}, Salary: {{ resume.salary }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+
